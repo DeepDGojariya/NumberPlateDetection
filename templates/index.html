@@ -1,0 +1,100 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>NumberPlateDetection & OCR</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+   .fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        padding: 10px 0;
+        
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    } 
+  </style>
+  
+
+</head>
+
+<body>
+<header class="text-gray-400 bg-gray-900 body-font fixed-header">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-purple-500 rounded-full" viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+      <span class="ml-3 text-xl">Number Plate Detection and Recognization</span>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-5 hover:text-white" href="{{url_for('about')}}">About Us</a>
+    </nav>
+    
+  </div>
+</header>
+
+<section class="text-gray-400 bg-gray-900 body-font">
+  <div class="container mx-auto flex px-5 py-36 items-center justify-center flex-col">
+    {% if context['id']==2 %}
+    <img class="lg:w-1/6 md:w-2/6 w-2/6 mb-10 object-cover object-center rounded" alt="hero" src="{{url_for('static',filename='download.jpg')}}">
+    {% endif %}
+    {% if context['id']==1 %}
+    <img class="lg:w-2/6 md:w-2/6 w-2/6 mb-10 object-cover object-center rounded" alt="hero" src="{{url_for('download_file',filename=context['name'])}}">
+    {% endif %}
+    <div class="text-center lg:w-2/3 w-full">
+      {% if context['id']==2 %}
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Upload Image</h1>
+      {% endif %}
+       {% if context['id']==1 %}
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Get Number Plate</h1>
+      {% endif %}
+      <div class="flex justify-center">
+      {% if context['id']==2 %}
+        <form method='POST' enctype='multipart/form-data'>
+        <input type="file" name="userfile">
+            <button type="submit" class="inline-flex text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg">Upload</button>
+        </input>    
+    </form>
+    {% endif %}
+    {% if context['id']==1 %}
+    <form method="post" action="/predictions">
+        <button class="ml-4 inline-flex text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 hover:text-white rounded text-lg">Predict</button>
+        </form>
+    {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+
+    <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020 Designed & Developed By Deep Gojariya
+
+    </p>
+    <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+      <a class="text-gray-500" href="https://www.facebook.com/deep.gojariya.9" target="_blank">
+        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+        </svg>
+      </a>
+
+      <a class="ml-3 text-gray-500" href="https://www.linkedin.com/in/deep-gojariya-b8a8a3199/?originalSubdomain=in" target="_blank">
+        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+          <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+          <circle cx="4" cy="4" r="2" stroke="none"></circle>
+        </svg>
+      </a>
+    </span>
+  </div>
+</section>
+</body>
+</html>
